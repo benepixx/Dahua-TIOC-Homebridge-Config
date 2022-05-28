@@ -1,0 +1,57 @@
+# See attached config to arm/disarm a single TIOC Camera.
+
+{
+    "accessory": "Http-SecuritySystem",
+    "name": "CCTV System",
+    "debug": true,
+    "username": "username",
+    "password": "password",
+    "immediately": false,
+    "polling": true,
+    "pollInterval": 3000,
+    "http_method": "GET",
+    "urls": {
+        "stay": {
+            "url": "http://{IPADDRESS}/cgi-bin/configManager.cgi?action=setConfig&DisableLinkage[0].Enable=false",
+            "body": "stay"
+        },
+        "away": {
+            "url": "http://{IPADDRESS}/cgi-bin/configManager.cgi?action=setConfig&DisableLinkage[0].Enable=false",
+            "body": "away"
+        },
+        "night": {
+            "url": "http://{IPADDRESS}/cgi-bin/configManager.cgi?action=setConfig&DisableLinkage[0].Enable=false",
+            "body": "night"
+        },
+        "disarm": {
+            "url": "http://{IPADDRESS}/cgi-bin/configManager.cgi?action=setConfig&DisableLinkage[0].Enable=true",
+            "body": ""
+        },
+        "readCurrentState": {
+            "url": "http://{IPADDRESS}/cgi-bin/configManager.cgi?action=getConfig&name=DisableLinkage",
+            "body": ""
+        },
+        "readTargetState": {
+            "url": "http://{IPADDRESS}/cgi-bin/configManager.cgi?action=getConfig&name=DisableLinkage",
+            "body": ""
+        }
+    },
+    "mappers": [
+        {
+            "type": "regex",
+            "parameters": {
+                "regexp": "(?:(false|true))",
+                "capture": "1"
+            }
+        },
+        {
+            "type": "static",
+            "parameters": {
+                "mapping": {
+                    "false": "1",
+                    "true": "3"
+                }
+            }
+        }
+    ]
+}
