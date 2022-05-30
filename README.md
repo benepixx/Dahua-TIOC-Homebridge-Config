@@ -33,4 +33,6 @@ Correct number in HomeKit is as follows:
 
 Im yet to implement the “triggered” state but could easily do this with alarm feedback. So stay tuned. 
 
+Ive added the HTTP Switch config as seperate config file as that uses the "Homebridge Http Switch" Plugin to work
+
 Im yet to Implement any other arming modes, such as not having the siren activate in home mode, so every arming state other than off is armed fully. (Away Mode) so even if you hit home mode it’ll change to away mode when the polling catches up with your request.
