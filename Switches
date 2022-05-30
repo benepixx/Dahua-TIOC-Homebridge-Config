@@ -1,0 +1,66 @@
+##### These switches are for use with homebridge-http-switch homebridge plugin
+##### These have been tested using a TIOC 2.0 Camera with dual illuminator, Ive been sending these commands directly to the camera, completly unstested with a recorder.
+##### This Config uses Digest Auth only. To change auth type change "sendImmediately" to true.
+
+##### Infrared Mode Switch with 2 way feedback
+
+{
+    "accessory": "HTTP-SWITCH",
+    "name": "Infrared Mode",
+    "switchType": "stateful",
+    "timeout": 1000,
+    "onUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=setConfig&LightingScheme[0][0].LightingMode=InfraredMode",
+    "method": "GET",
+    "auth": {
+        "username": "username",
+        "password": "password",
+        "sendImmediately": false
+    },
+    "offUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=setConfig&LightingScheme[0][0].LightingMode=WhiteMode",
+    "statusUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=getConfig&name=LightingScheme",
+    "pullInterval": 5000,
+    "debug": false,
+    "statusPattern": "0].LightingMode=InfraredMode"
+}
+
+##### Floodlight Mode Switch with 2 way feedback
+
+{
+    "accessory": "HTTP-SWITCH",
+    "name": "Floodlight Mode",
+    "switchType": "stateful",
+    "timeout": 1000,
+    "onUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=setConfig&LightingScheme[0][0].LightingMode=WhiteMode",
+    "method": "GET",
+    "auth": {
+        "username": "username",
+        "password": "password",
+        "sendImmediately": false
+    },
+    "offUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=setConfig&LightingScheme[0][0].LightingMode=InfraredMode",
+    "statusUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=getConfig&name=LightingScheme",
+    "pullInterval": 5000,
+    "debug": false,
+    "statusPattern": "0].LightingMode=WhiteMode"
+}
+
+##### Auto Mode Switch with 2 way feedback
+
+{
+    "accessory": "HTTP-SWITCH",
+    "name": "Motion Mode",
+    "switchType": "stateful",
+    "timeout": 1000,
+    "onUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=setConfig&LightingScheme[0][0].LightingMode=AIMode",
+    "method": "GET",
+    "auth": {
+        "username": "username",
+        "password": "password",
+        "sendImmediately": false
+    },
+    "offUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=setConfig&LightingScheme[0][0].LightingMode=InfraredMode",
+    "statusUrl": "http://{Ip Address}/cgi-bin/configManager.cgi?action=getConfig&name=LightingScheme",
+    "pullInterval": 5000,
+    "debug": false,
+    "statusPattern": "0].LightingMode=AIMode"
+}
