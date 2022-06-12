@@ -1,0 +1,42 @@
+{
+    #### This Config Exposes a Contact Sensor with 2 way feedback that tracks the output state of the Dahua CCTV camera's Alarm output.
+    #### You can program the alarm ouput on the Camera to trigger when all manor of IVS rules happen, meaning you get really reliable status change notifications.
+    #### Config Intended for use with staromeste's advanced HTTP accessory plugin: https://github.com/staromeste/homebridge-http-advanced-accessory#readme
+    
+    
+    
+    "accessory": "HttpAdvancedAccessory",
+    "service": "ContactSensor",
+    "name": "CCTV Alarm Out State",
+    "forceRefreshDelay": 5,
+    "polling": true,
+    "pollInterval": 3000,
+    "http_method": "GET",
+    "username": "username",
+    "password": "password",
+    "immediately": false,
+    "debug": true,
+    "urls": {
+        "getContactSensorState": {
+            "url": "http://{IP ADDRESS}/cgi-bin/alarm.cgi?action=getOutStates",
+            "mappers": [
+                {
+                    "type": "regex",
+                    "parameters": {
+                        "regexp": "(?:result=(1|0|))",
+                        "capture": "1"
+                    }
+                },
+                {
+                    "type": "static",
+                    "parameters": {
+                        "mapping": {
+                            "0": "0",
+                            "1": "1"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
